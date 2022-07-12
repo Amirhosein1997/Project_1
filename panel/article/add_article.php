@@ -22,7 +22,7 @@ if (isset($_POST['publish']) or isset($_POST['save'])){
     <title>افزودن نوشته جدید</title>
     <script src="https://cdn.tiny.cloud/1/yp32oxam6dc9luldn9u29mvhyo76y09lc3yslstrt7e7xj08/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="../js/tinymce_js.js"></script>
-    <link rel="stylesheet" href="../css/tinymce_css.css" >
+    <link rel="stylesheet" href="../css/tinymce_css.css">
 </head>
 <form method="post" enctype="multipart/form-data">
     <div class="row">

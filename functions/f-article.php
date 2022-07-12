@@ -57,11 +57,95 @@ function publish_article($info,$img,$cats,$status){
     $res=$query->fetchAll(PDO::FETCH_OBJ);
     return $res;
 
-
     }
+function article_callback($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from article_tbl where id='$id'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
 
+}
+function update_article($id,$status,$info,$image_loc,$cats){
 
+    $title=$info['title'];
+    $text=$info['text'];
+    if (is_array($cats)){$cats_ids=implode(',',$cats);
+    }else{$cats_ids=$cats;}
+    $author=$_SESSION['login_user'];
+    $date=date('y/m/d');
+    $pdo=connect_db();
+    $query=$pdo->prepare("update article_tbl set title='$title',text='$text',cat_id='$cats_ids',img='$image_loc',author='$author',date='$date',status='$status' where id=$id ");
+    $query->execute();
 
+}
+function delete_article($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("delete from article_tbl where id='$id'");
+    $query->execute();
+
+}
+function count_comments(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from comment_tbl order by id desc ");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function comments_lists(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from comment_tbl where parent='0'");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+
+}
+function reply_list($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from comment_tbl where parent='$id'");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+
+}
+function delete_comment($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("delete from comment_tbl where id='$id'");
+    $query->execute();
+
+}
+function callback_comment($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from comment_tbl where id='$id'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+
+}
+function publisher($switcher,$id_comment,$id_article,$reply_text,$reply_author){
+    switch ($switcher){
+        case 'pub_pub':
+            $status_comment='publish';
+            $status_reply='publish';
+            break;
+        case 'save_save':
+            $status_comment='save';
+            $status_reply='save';
+            break;
+        case 'pub_save':
+            $status_comment='publish';
+            $status_reply='save';
+            break;
+    }
+    $random_code=getRandomString(6);
+    $date=date("y/m/d");
+    $pdo=connect_db();
+    $query=$pdo->prepare("update comment_tbl set status_comment='$status_comment',status_reply='$status_reply' where id='$id_comment'");
+    $query->execute();
+    $query2=$pdo->prepare("insert into comment_tbl (code, article_id, parent, author, text, date, status_comment, status_reply) VALUES ('$random_code','$id_article','$id_comment','$reply_author','$reply_text','$date','$status_comment','$status_reply')");
+    $query2->execute();
+
+}
 
 
 
