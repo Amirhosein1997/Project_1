@@ -146,7 +146,13 @@ function publisher($switcher,$id_comment,$id_article,$reply_text,$reply_author){
     $query2->execute();
 
 }
-
+function select_bad_word(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from comment_check");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
 
 
 
