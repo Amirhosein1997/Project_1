@@ -1,6 +1,6 @@
 <?php
 include_once 'connect.php';
-
+include_once 'jdf.php';
 function upload_pics($pic,$location){
 $img_name=$pic['name'];
 $img_tmp=$pic['tmp_name'];

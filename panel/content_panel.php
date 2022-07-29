@@ -86,13 +86,16 @@
             case 'edit_groupe_page' :
                 include_once 'page/edit_groupe_page.php';
                 break;
+            case 'edit-page':
+                include_once 'page/edit_page.php';
+                break;
             case 'made_groupe_page' :
                 include_once 'page/made_groupe_page.php';
                 break;
             case 'delete-groupe-page' :
                 include_once 'page/delete_groupe_page.php';
                 break;
-            case 'delete_page' :
+            case 'delete-page' :
                 include_once 'page/delete_page.php';
                 break;
             case 'config-access' :
