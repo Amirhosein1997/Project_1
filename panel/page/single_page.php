@@ -13,11 +13,16 @@ if (isset($_POST['send'])){
     header("location:dashboard.php?page=single-page");
 
 }
-$single_page_reco=single_record();
-$btns=$single_page_reco->btn_title;
-$exploded_btn=explode(',',$btns);
-$page_links=$single_page_reco->page_link;
-$exploded_page=explode(',',$page_links);
+
+$single_page_records=single_page_callback();
+$single_page_nums=count($single_page_records);
+if($single_page_nums!==0){
+    $single_page_reco=single_record();
+    $btns=$single_page_reco->btn_title;
+    $exploded_btn=explode(',',$btns);
+    $page_links=$single_page_reco->page_link;
+    $exploded_page=explode(',',$page_links);
+}
 ?>
 <div class="alert alert-success" role="alert">
     <h4 class="alert-heading">تنظیمات تک صفحه</h4>
@@ -45,20 +50,20 @@ $exploded_page=explode(',',$page_links);
 <form method="post" enctype="multipart/form-data" style="background-color: #4d4460;padding: 30px;">
     <div class="mb-3">
         <label for="exampleInput1" class="form-label">عنوان تک صفحه</label>
-        <input value="<?php echo $single_page_reco->title; ?>" name="info[title]" type="text" class="form-control" id="exampleInput1" >
+        <input value="<?php if ($single_page_nums!==0){echo $single_page_reco->title;} ?>" name="info[title]" type="text" class="form-control" id="exampleInput1" >
     </div>
     <div class="mb-3">
         <label for="exampleInput2" class="form-label">محتوای قابل نمایش</label>
-        <textarea name="info[description]" class="form-control" id="exampleInput2" rows="1" ><?php echo $single_page_reco->description; ?></textarea>
+        <textarea name="info[description]" class="form-control" id="exampleInput2" rows="1" ><?php if ($single_page_nums!==0){ echo $single_page_reco->description;} ?></textarea>
     </div>
     <div class="mb-3">
         <label for="exampleInput3" class="form-label">کد امبد ویدیو</label>
-        <textarea name="info[vid_link]" class="form-control" id="exampleInput3" rows="1"><?php echo $single_page_reco->video_code; ?></textarea>
+        <textarea name="info[vid_link]" class="form-control" id="exampleInput3" rows="1"><?php if($single_page_nums!==0){ echo $single_page_reco->video_code;} ?></textarea>
     </div>
     <div class="row">
         <div class="col">
             <label for="exampleInput4" class="form-label">عنوان کلید اول</label>
-            <input value="<?php echo $exploded_btn[0]; ?>" name="btn_title[btn1]" type="text" class="form-control" >
+            <input value="<?php if($single_page_nums!==0){echo $exploded_btn[0];} ?>" name="btn_title[btn1]" type="text" class="form-control" >
         </div>
         <div class="col">
             <label for="exampleInput5" class="form-label">لینک کلید اول</label>
@@ -66,7 +71,7 @@ $exploded_page=explode(',',$page_links);
                 <option selected disabled>__صفحه را انتخاب کنید</option>
                 <?php $template_links=links();
                 foreach ($template_links as $link):?>
-                    <option <?php if ($link->link==$exploded_page[0]){echo 'selected';} ?> value="<?php echo $link->link; ?>"><?php echo $link->name; ?></option>
+                    <option <?php if($single_page_nums!==0){ if ($link->link==$exploded_page[0]){echo 'selected';}} ?> value="<?php echo $link->link; ?>"><?php echo $link->name; ?></option>
                 <?php endforeach;?>
             </select>
         </div>
@@ -83,7 +88,7 @@ $exploded_page=explode(',',$page_links);
     <div class="row">
         <div class="col">
             <label for="exampleInput7" class="form-label">عنوان کلید دوم</label>
-            <input value="<?php echo $exploded_btn[1]; ?>" name="btn_title[btn2]" type="text" class="form-control" >
+            <input value="<?php if($single_page_nums!==0){ echo $exploded_btn[1];} ?>" name="btn_title[btn2]" type="text" class="form-control" >
         </div>
         <div class="col">
             <label for="exampleInput8" class="form-label">لینک کلید دوم</label>
@@ -91,7 +96,7 @@ $exploded_page=explode(',',$page_links);
                 <option selected disabled>__صفحه را انتخاب کنید</option>
                 <?php $template_links=links();
                 foreach ($template_links as $link):?>
-                    <option <?php if ($link->link==$exploded_page[1]){echo 'selected';} ?> value="<?php echo $link->link; ?>"><?php echo $link->name; ?></option>
+                    <option <?php if($single_page_nums!==0){ if ($link->link==$exploded_page[1]){echo 'selected';}} ?> value="<?php echo $link->link; ?>"><?php echo $link->name; ?></option>
                 <?php endforeach;?>
             </select>
         </div>
@@ -108,8 +113,8 @@ $exploded_page=explode(',',$page_links);
         <label for="exampleInput10" class="form-label">وضعیت صفحه</label>
         <select name="info[status]" class="form-select" aria-label="Default select example">
             <option selected disabled>انتخاب وضعیت</option>
-            <option <?php if ($single_page_reco->status=='on'){echo 'selected';} ?> value="on">on</option>
-            <option <?php if ($single_page_reco->status=='off'){echo 'selected';} ?> value="off">off</option>
+            <option <?php if($single_page_nums!==0){ if ($single_page_reco->status=='on'){echo 'selected';}} ?> value="on">on</option>
+            <option <?php if($single_page_nums!==0){ if ($single_page_reco->status=='off'){echo 'selected';}} ?> value="off">off</option>
         </select>
     </div>
 
