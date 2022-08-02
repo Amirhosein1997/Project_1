@@ -1,5 +1,7 @@
 <?php include_once '../functions/f-article.php';
 include_once '../functions/functions.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'add_article.php') !==false):
 if (isset($_POST['publish']) or isset($_POST['save'])){
     if (isset($_POST['publish'])){
         $status='publish';
@@ -81,3 +83,9 @@ if (isset($_POST['publish']) or isset($_POST['save'])){
     <button name="save" type="submit" class="btn btn-secondary">ذخیره مقاله</button>
     <a class="btn btn-primary" href="dashboard.php?page=list-article" role="button">بازگشت</a>
 </form>
+
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

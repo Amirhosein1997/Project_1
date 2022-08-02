@@ -1,4 +1,6 @@
 <?php include_once '../functions/f-user.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'example_client.php') !==false):
 $result_search="";
 $result_search_permition="";
 $count_search=0;
@@ -179,3 +181,8 @@ if (count($users)==0):
 <?php endif;?>
 
 </div>
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

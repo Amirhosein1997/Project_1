@@ -1,3 +1,7 @@
+<?php
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'list_upload_file.php') !==false):
+?>
 <!DOCTYPE html>
 <head>
     <title>گزارش تاریخچه ارسال فایل</title>
@@ -43,3 +47,8 @@
     <?php endforeach; ?>
     </tbody>
 </table>
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

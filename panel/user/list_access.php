@@ -1,4 +1,7 @@
-<?php include_once '../functions/f-user.php';?>
+<?php include_once '../functions/f-user.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'list_access.php') !==false):
+?>
 
 <!DOCTYPE html>
 <head>
@@ -59,3 +62,8 @@
 
 
 </div>
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

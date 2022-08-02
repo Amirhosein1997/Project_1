@@ -2,19 +2,23 @@
 <head>
     <title>مدیرت پنل کاربری</title>
 </head>
-
+<?php
+include_once '../functions/f-user.php';
+if (isset($_SESSION['login_user'])){
+$user_reco=user_reco($_SESSION['login_user']);}
+?>
 
 
 
 <div class="admin-menu">
     <ul>
         <div class="userwel">
-            <img src="/img/user.png">
-            <p> خوش آمدید امیرحسین خالقی</p>
+            <img src="<?php if (isset($_SESSION['login_user'])){ echo $user_reco->image;} ?>">
+            <p> خوش آمدید <?php if (isset($_SESSION['login_user'])){ echo $user_reco->full_name;} ?> </p>
         </div>
 
         <li class="dash">
-            <a href="dashboard.php">
+            <a href="dashboard.php?page=welcome-page">
                 <svg class="bi bi-gear-wide-connected" width="1em" height="1em" viewBox="0 0 20 20"
                      fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"

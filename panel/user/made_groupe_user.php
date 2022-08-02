@@ -1,3 +1,7 @@
+<?php include_once '../functions/functions.php';
+$select_permition=select_user_permition($_SESSION['login_user']);
+if (strpos($select_permition->permition,'made_groupe_user.php') !==false):
+?>
 <!DOCTYPE html>
 <head>
     <title>پیکربندی گروهی کاربران</title>
@@ -93,3 +97,8 @@ if($pdo){
     </div>
 </form>
 </div>
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

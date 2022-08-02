@@ -3,7 +3,7 @@ include_once 'functions/f-user.php';
 if (isset($_POST['send'])){
   $info=$_POST['info'];
   register_user($info);
-header("location:panel/dashboard.php");
+header("location:login.php");
 }
 ?>
 <!doctype html>
@@ -42,10 +42,11 @@ header("location:panel/dashboard.php");
                     ایمیل : <br>
                     <input type="email" name="info[email]" class="form-control" required><br>
 
-                    <div class="custom-checkbox fr">
+                   <!-- <div class="custom-checkbox fr">
                         <input type="checkbox" name="remember" value="wordpress" class="custom-control-input" id="wp">
                         <label class="custom-control-label" for="wp">مرابه خاطر بسپار</label>
                     </div>
+                    -->
                     <br>
                     <hr>
 

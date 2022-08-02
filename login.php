@@ -1,12 +1,11 @@
 <?php
 session_start();
+include_once 'functions/f-user.php';
 if(isset($_POST['send'])){
-    include_once 'functions/f-user.php';
     $user=$_POST['username'];
     $pass=$_POST['password'];
-    $pass_rm=$_POST['password'];
     if(isset($_POST['remember'])){
-        remember($user,$pass_rm);
+        remember($user,$pass);
     }
     login_user($user,$pass);
 }

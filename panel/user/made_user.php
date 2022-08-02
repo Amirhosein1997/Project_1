@@ -1,8 +1,8 @@
 <?php
 include_once '../functions/f-user.php';
 include_once '../functions/functions.php';
-//  $select_permition=select_user_permition($_SESSION['login_user']);
- // if (strpos($select_permition->permition,'made_user.php') !==false):
+  $select_permition=select_user_permition($_SESSION['login_user']);
+  if (strpos($select_permition->permition,'made_user.php') !==false):
 ?>
 
 <?php
@@ -186,7 +186,9 @@ if(isset($_POST['submit'])){
     </form>
 
 </div>
-        <?php // else :?>
-    <!--   <p>شما به این بخش دسترسی ندارید</p> -->
-        <?php // endif;?>
+        <?php  else :?>
+      <div class="alert alert-warning" role="alert">
+          NO_ACCESS!!!
+      </div>
+        <?php  endif;?>
 

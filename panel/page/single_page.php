@@ -5,6 +5,8 @@
 <?php
 include_once '../functions/functions.php';
 include_once '../functions/f-page.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'single_page.php') !==false):
 if (isset($_POST['send'])){
     $info=$_POST['info'];
     $btn_title=$_POST['btn_title'];
@@ -120,3 +122,10 @@ if($single_page_nums!==0){
 
     <button name="send" type="submit" class="btn btn-primary">ثبت</button>
 </form>
+
+
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

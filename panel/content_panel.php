@@ -5,6 +5,9 @@
  if(isset($_SESSION['login_user'])) {
     if (isset($_GET['page'])) {
         switch ($_GET['page']) {
+            case 'welcome-page':
+                echo '<img style="width: 100%;height: auto;" src="../img/photo-1533745848184-3db07256e163.jpg">';
+                break;
             case 'new-category' :
                 include_once 'Category/add_category.php';
                 break;

@@ -1,6 +1,8 @@
 <?php
 include_once '../functions/functions.php';
 include_once '../functions/f-article.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'list_comment.php') !==false):
 $all_comments=count_comments();
 $comments_nums=count($all_comments)
 ?>
@@ -72,3 +74,8 @@ $comments_nums=count($all_comments)
 <?php endforeach;?>
     </tbody>
 </table>
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

@@ -5,6 +5,8 @@
 <?php
 include_once '../functions/functions.php';
 include_once '../functions/f-widget.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'list_widget.php') !==false):
 $widget_records=wid_reco_callback();
 ?>
 
@@ -41,3 +43,9 @@ $widget_records=wid_reco_callback();
 <?php endforeach;?>
     </tbody>
 </table>
+
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

@@ -5,6 +5,8 @@
 <?php
 include_once '../functions/functions.php';
 include_once '../functions/f-slider.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'list_slider.php') !==false):
 $all_subsliders=sub_sliders_records();
 
 
@@ -44,3 +46,9 @@ $all_subsliders=sub_sliders_records();
     <?php endforeach;?>
     </tbody>
 </table>
+
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

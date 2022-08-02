@@ -5,6 +5,8 @@
 <?php
 include_once '../functions/functions.php';
 include_once '../functions/f-widget.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'setting_widget.php') !==false):
 ?>
 <?php
 if (isset($_POST['send'])){
@@ -79,6 +81,11 @@ if (isset($_POST['send'])){
     <br>
     <a class="btn btn-primary" href="dashboard.php?page=setting-widget" role="button">بازگشت</a>
 </form>
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>
 <br>
 <hr>
 <br>

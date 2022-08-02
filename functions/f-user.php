@@ -32,7 +32,7 @@ if($res){
     $pas=sha1($pass);
     if($pas == $res->password){
         $_SESSION['login_user']=$res->user_name;
-        header("location:panel/dashboard.php");
+        header("location:panel/dashboard.php?page=welcome-page");
 
     echo "you are logged in";
     }
@@ -250,7 +250,13 @@ function select_search_info($info){
     return $res;
 
 }
-
+function user_reco($user_name){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from users_tbl where user_name='$user_name'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
 
 
 

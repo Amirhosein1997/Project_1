@@ -1,5 +1,9 @@
 <?php include_once '../functions/functions.php';
-include_once '../functions/f-slider.php';?>
+include_once '../functions/f-slider.php';
+$select_perm=select_user_permition($_SESSION['login_user']);
+if (strpos($select_perm->permition,'insert_form.php') !==false):
+?>
+
 <!DOCTYPE html>
 <head>
     <title>افزودن دسته اسلایدی جدید</title>
@@ -35,3 +39,8 @@ header("location:dashboard.php?page=setting-slider");
     </div>
     <button name="send" type="submit" class="btn btn-primary">ثبت</button>
 </form>
+<?php else:?>
+    <div class="alert alert-warning" role="alert">
+        NO_ACCESS!!!
+    </div>
+<?php endif;?>

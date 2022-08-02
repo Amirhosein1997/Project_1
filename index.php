@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Project_1</title>
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -22,9 +25,17 @@
             </div>
             <div class="col-md-6 link">
                 
-                <a href="login.php" class="login">ورود به سایت</a>
-                <a href="register.php" class="sabtnam">ثبت نام کنید</a>
 
+
+                <?php
+                if (isset($_SESSION['login_user'])){
+                    echo '<a href="panel/dashboard.php?page=welcome-page" class="login">ورود به پنل کاربری</a>';
+                    echo '<a href="panel/exit_file.php" class="sabtnam">خروج</a>';
+                }else{
+                    echo '<a href="login.php" class="login">ورود به سایت</a>';
+                    echo '<a href="register.php" class="sabtnam">ثبت نام کنید</a>';
+                }
+                ?>
 
             </div>
 

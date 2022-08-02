@@ -3,7 +3,9 @@
 session_start();
 ?>
 <?php ob_start();?>
-
+<?php
+include_once '../functions/functions.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +20,13 @@ session_start();
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+<?php if (isset($_SESSION['login_user'])): ?>
 <div class="topmenu">
     <?php include_once 'top_menu.php' ?>
 </div>
+<div>
 
+</div>
 
 <div class="container-fluid">
     <div class="admin-container">
@@ -42,5 +47,12 @@ session_start();
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/main.js"></script>
+
+<?php else: ?>
+<div style="text-align: center" class="alert alert-danger" role="alert">
+    please sign in !!!!!!!
+    <a class="btn btn-primary" href="../index.php" role="button">بازگشت به سایت</a>
+</div>
+<?php endif;?>
 </body>
 </html>
