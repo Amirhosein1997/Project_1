@@ -123,6 +123,12 @@
             case 'report-sms' :
                 include_once 'sms/setting_report.php';
                 break;
+            case 'edit-preset-sms':
+                include_once 'sms/edit_preset_sms.php';
+                break;
+            case 'delete-preset-sms':
+                include_once 'sms/delete_preset_sms.php';
+                break;
             case 'email-setting' :
                 include_once 'email/setting_email.php';
                 break;
