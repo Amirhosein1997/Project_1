@@ -156,8 +156,8 @@ if(isset($_POST['submit'])){
                 <label for="v20" class="form-label">وضعیت فعالیت</label>
                 <select id="v20" name="info[status]" class="form-select" >
                     <option selected disabled>__انتخاب کنید</option>
-                    <option value="on">فعال</option>
-                    <option value="off">غیر فعال</option>
+                    <option value="active">فعال</option>
+                    <option value="inactive">غیر فعال</option>
 
                 </select>
             </div>

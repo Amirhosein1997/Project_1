@@ -129,6 +129,9 @@
             case 'delete-preset-sms':
                 include_once 'sms/delete_preset_sms.php';
                 break;
+            case 'sms-report':
+                include_once 'sms/sms_report.php';
+                break;
             case 'email-setting' :
                 include_once 'email/setting_email.php';
                 break;
@@ -138,7 +141,9 @@
             case 'report_send_email' :
                 include_once 'email/report_send_email.php';
                 break;
-
+            case 'users-list':
+                include_once 'phonebook/users_list.php';
+                break;
         }
     } else {
         include_once 'quick_access.php';

@@ -34,12 +34,13 @@ if ($_GET['op']=='preset_sms_deleted'):?>
 <?php endif;?>
 <?php endif;?>
 
+
 <div class="shadow p-4 mb-4 bg-dark rounded" >
 <div class="container shadow p-4 mb-4 bg-light text-dark rounded" >
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#home">راهنمای پیکربندی</a>
+            <a class="nav-link <?php if (!isset($_GET['phone']) and !isset($_GET['link'])){echo "active";} ?>" data-bs-toggle="tab" href="#home">راهنمای پیکربندی</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#menu1">موجودی پنل</a>
@@ -48,16 +49,16 @@ if ($_GET['op']=='preset_sms_deleted'):?>
             <a class="nav-link" data-bs-toggle="tab" href="#menu2">پیامک های پیش فرض</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#menu3">پیامک فردی</a>
+            <a class="nav-link <?php if (isset($_GET['phone'])){echo 'active';} ?>" data-bs-toggle="tab" href="#menu3">پیامک فردی</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#menu4">ارتباط با پشتیبانی</a>
+            <a class="nav-link <?php if (isset($_GET['link'])){echo 'active';} ?>" data-bs-toggle="tab" href="#menu4">ارتباط با پشتیبانی</a>
         </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div class="tab-pane container active" id="home">
+        <div class="tab-pane container <?php if (!isset($_GET['phone']) and !isset($_GET['link'])){echo "active";} ?> " id="home">
             <br>
             <div class="alert alert-info">
                 <h5>پیکربندی سرویس SMS</h5>
@@ -74,8 +75,9 @@ if ($_GET['op']=='preset_sms_deleted'):?>
                 //  $credit=getcredit();
                     $credit=38320455.456;
                     $exploded_credit=explode('.',$credit);
-                    $formated_credit=number_format($exploded_credit[0]);
-                    echo $formated_credit;
+                    $formated_number=number_format($exploded_credit[0]);
+                    echo $formated_number;
+
                 ?>
                 ریال
             </div>
@@ -90,8 +92,8 @@ if ($_GET['op']=='preset_sms_deleted'):?>
             </div>
         </div>
         <div style="background-color: #5da46d;" class="tab-pane container fade rounded" id="menu2"><?php include_once 'pre_set_sms.php';?></div>
-        <div class="tab-pane container fade" id="menu3"><?php include_once 'send_sms.php';?></div>
-        <div class="tab-pane container fade" id="menu4"><?php include_once 'support.php';?></div>
+        <div class="tab-pane container <?php if (isset($_GET['phone'])){echo 'active';} ?>" id="menu3"><?php include_once 'send_sms.php';?></div>
+        <div class="tab-pane container <?php if (isset($_GET['link'])){echo 'active';} ?>" id="menu4"><?php include_once 'support.php';?></div>
 
 
     </div>
