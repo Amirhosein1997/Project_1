@@ -15,10 +15,7 @@ if (isset($_GET['id'])){
             delete_comment($id);
             break;
         }
-
-
     }
-
 }
 
 

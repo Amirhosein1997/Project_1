@@ -54,10 +54,14 @@ function delete_widget($id){
     $query=$pdo->prepare("delete from widget_tbl where id='$id'");
     $query->execute();
 
-
-
 }
-
+function widgets_back(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from widget_tbl where status='on'");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
 
 
 

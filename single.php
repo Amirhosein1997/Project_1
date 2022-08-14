@@ -1,3 +1,7 @@
+<?php
+session_start();
+ob_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,91 +9,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>مقاله</title>
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-
-
 </head>
+<?php
+include_once 'functions/f-article.php';
+$article_id=$_GET['id'];
+$article_record=published_article($article_id);
+$mod_img=substr($article_record->img,3);
+
+?>
 <body>
-<div class="container-fluid header">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 logo">
-                <img src="img/logo.png" width="160" height="50">
-            </div>
-            <div class="col-md-6 link">
-                
-                <a href="login.php" class="login">ورود به سایت</a>
-                <a href="register.php" class="sabtnam">ثبت نام کنید</a>
 
-
-            </div>
-
-
-            <aside class="menu-bar">
-                <nav id="menu_item">
-                    <ul class="menu">
-                        <li class="fa fa-wikipedia-w menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7895">
-                            <a href="https://websoft3.com/wordpress-tutorials/" dideo-checked="true">آموزش
-                                وردپرس</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2214">
-                                    <a href="https://websoft3.com/category/wordpress-tutorials-article/video_wp_vip/"
-                                       dideo-checked="true">فیلم آموزش وردپرس غیر رایگان</a></li>
-                                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2215">
-                                    <a href="https://websoft3.com/category/wordpress-tutorials-article/article_wp/"
-                                       dideo-checked="true">مقالات وردپرس</a></li>
-                                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2281">
-                                    <a href="https://websoft3.com/category/wordpress-tutorials-article/wordpress-amator-learn/"
-                                       dideo-checked="true">آموزش های مقدماتی وردپرس</a></li>
-                            </ul>
-                        </li>
-                        <li class="fa fa-wikipedia-w menu-item menu-item-type-custom menu-item-object-custom menu-item-4459">
-                            <a href="https://websoft3.com/category/woocommerce-tutorials/" dideo-checked="true">آموزش
-                                ووکامرس</a></li>
-                        <li class="fa fa-diamond menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-5593">
-                            <a href="https://websoft3.com/product-category/wordpress-themes/" dideo-checked="true">قالب
-                                وردپرس</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6167">
-                                    <a href="https://websoft3.com/category/free-wordpress-template/"
-                                       dideo-checked="true">قالب وردپرس رایگان</a></li>
-                            </ul>
-                        </li>
-                        <li class="fa fa-code menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2209">
-                            <a href="https://websoft3.com/category/program-learn/" dideo-checked="true">آموزش برنامه
-                                نویسی</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2210">
-                                    <a href="https://websoft3.com/category/program-learn/%d8%a2%d9%85%d9%88%d8%b2%d8%b4-php/"
-                                       dideo-checked="true">آموزش PHP</a></li>
-                                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2211">
-                                    <a href="https://websoft3.com/category/program-learn/learn-c/"
-                                       dideo-checked="true">آموزش سی شارپ</a></li>
-                            </ul>
-                        </li>
-                        <li class="fa fa-graduation-cap menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-4132">
-                            <a href="https://websoft3.com/product-category/web-design-courses/"
-                               dideo-checked="true">دوره های آموزشی</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-7281">
-                                    <a href="https://websoft3.com/product-category/web-design-courses/popular-toturial-wordpress/"
-                                       dideo-checked="true">محبوب ترین دوره های آموزشی وردپرس</a></li>
-                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4133">
-                                    <a href="https://websoft3.com/category/tutorial-designing-site-wordpress/"
-                                       dideo-checked="true">آموزش طراحی سایت رایگان</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-            </aside>
-        </div>
-    </div>
-</div>
+<?php include_once 'index_header.php';?>
 <br>
 <br>
 
@@ -99,22 +34,36 @@
 
 
             <div class="post-single">
-                <div class="post-title-single"><h1>دوره آموزش صفرتاصد php مناسب بازارکار</h1>
+                <div class="post-title-single"><h1><?php echo $article_record->title; ?></h1>
                     <div class="clearfix"></div>
                     <div class="entry-meta">
                         <div class="view">
                             دسته بندی :
                             <ul class="post-categories">
-                                <li><a href="" rel="category tag"></a></li>
+                                <?php $cat_records=categories_names($article_record->cat_id);
+                                foreach ($cat_records as $cat_record):?>
+
+                                <li><a href="" rel="category tag"><?php echo $cat_record->title.'/'; ?></a></li>
+
+                                <?php endforeach;?>
                             </ul>
                         </div>
 
                         <div class="view"><i class="fa fa-comment"></i>
                             منتشر شده در :
+                        <?php echo $article_record->date; ?>
                         </div>
-                        <div class="view"><i class="fa fa-user"></i><span> نویسنده : </span>
+                        <div class="view"><i class="fa fa-user"></i><span>
+                                نویسنده :
+                            <?php echo $article_record->author; ?>
+                            </span>
+
                         </div>
-                        <div class="view"><i class="fa fa-user"></i><span> آیدی مقاله : </span>
+                        <div class="view"><i class="fa fa-user"></i><span>
+                                آیدی مقاله :
+                            <?php echo $article_id; ?>
+
+                            </span>
                         </div>
                     </div>
 
@@ -122,74 +71,82 @@
 
 
                 <div class="clearfix"></div>
-                <div class="thumb-single-product"><img src="img/default.jpg" class="attachment-medium size-medium wp-post-image" alt=""></div>
+                <div class="thumb-single-product"><img src="<?php echo $mod_img; ?>" width="50%" class="attachment-medium size-medium wp-post-image" alt=""></div>
 
                 <div class="post-txt-single">
-                    <p>
-
-                        آموزش طراحی سایت با bootstrap
-                        <br>
-                        “سرعت بخشیدن کار” – “عدم محدودیت در استفاده از المان های جی کوئری” – “صرفه جویی در وقت و انرژی”
-                        – “طراحی ریسپانسیو استاندارد بدون حرف و حدیث” – “ارتقاء سطح فنی شما” و… امتیازات مثبتی هستند که
-                        با یادگیری بوت استرپ نصیب شما میشود. بنابراین طراحی سایت با بوت استرپ قطعا یکی از لذت بخش ترین
-                        طراحی های شما خواهد
-                        <br>
-                        <br>
-                        چرا باید بوت استرپ را یادبگیرید؟
-                        <br>
-                        تصور کنید برای طراحی یک سایت ریسپانسیو که نیاز به المان هایی مثل (اسلایدر – تب منو – مدال باکس –
-                        آکاردئونی – منوزیرمنو – پروگرس بار و… ) تنها یک روز فرصت داشته باشید در غیر اینصورت مشتری را از
-                        دست میدهید چه میکنید؟
-                        <br><br><br><br>
-                        بهترین راه استفاده از فریم ورک محبوب بوت استرپ هست تا بتوانید زیباترین سایت ریسپانسیو را در کمتر
-                        از یک روز بدون هیچ دغدغه و نگرانی طراحی کنید.
-                        در ابتدای فیلم آموزش بوت استرپ به معرفی، روال کار و نحوه عملکرد بوت استرپ در طراحی ریسپانسیو
-                        میپردازیم و با مفهوم گرید بندی بوت استرپ بصورت کامل آشنا میشوید
-                        <br><br>
-                        سپس به سراغ کلاس ها و کامپوننت های جاوااسکریپت مثل اسلایدر – تب منو – منودراپ دون – مودال باکس –
-                        پروگرس بار – منوآکاردئونی – دکمه های مختلف – لیبل و … میرویم و نحوه استفاده از هریک را بصورت
-                        تمرین عملی میاموزیم.
-                        <br><br>
-                        پس از تسلط و درک کامل از نحوه کار با بوت استرپ ، فاز بعدی آموزش را آغاز میکنیم و یک سایت شرکتی
-                        زیبا و مدرن با بوت استرپ بصورت پروژه محور طراحی میکنیم.
-
-
-                    </p>
+                    <?php
+                      echo $article_record->text;
+                    ?>
                 </div>
             </div>
-
+            <?php if (isset($_SESSION['login_user'])):?>
+            <div>
+            </div>
+            <?php else: ?>
             <div class="box-comment">
                 <h3>نظر خود را در رابطه با این مقاله وارد کنید</h3>
                 <h3>برای ثبت نظر ابتدا باید
-                    <a class="btn btn-warning" href="#">وارد شوید</a>
+                    <a class="btn btn-warning" href="login.php">وارد شوید</a>
                     یا
-                    <a class="btn btn-primary" href="#"> ثبت نام کنید </a>
+                    <a class="btn btn-primary" href="register.php"> ثبت نام کنید </a>
                     کنید
                 </h3>
+                <?php endif;?>
 
-                <?php
-
-
-            ?>
 
 
                 <div class="comment">
-                    <img src="img/user.png">
-                    <h5>رضاحیدری</h5>
-                    <p>متن کامنت</p>
-                </div>
+                    <?php $parent_comments=on_parent_comments($article_id);
+                    foreach ($parent_comments as $parent_comment): ?>
 
+                    <img src="img/user.png">
+                    <h5><?php echo $parent_comment->author; ?></h5>
+                    <p><?php echo $parent_comment->text; ?></p>
+                        <?php $reply_comments=on_reply_comments($parent_comment->id);
+                        foreach ($reply_comments as $reply_comment): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-left-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm8.096-10.803L6 9.293V6.525a.5.5 0 0 0-1 0V10.5a.5.5 0 0 0 .5.5h3.975a.5.5 0 0 0 0-1H6.707l4.096-4.096a.5.5 0 1 0-.707-.707z"/>
+                            </svg>
+                            <img src="img/uuser.png">
+                            <h5><?php echo $reply_comment->author; ?></h5>
+                            <p><?php echo $reply_comment->text; ?></p>
+                        <?php endforeach; ?>
+
+
+                    <?php endforeach;?>
+                </div>
+                <?php
+                if (isset($_POST['send'])){
+                $text=$_POST['text'];
+                $exploded_text=explode(" ",$text);
+                    $bad_words=select_bad_word();
+                    foreach ($exploded_text as $word ){
+
+                        foreach ($bad_words as $bad_word){
+                            if ($bad_word->name==$word){
+                                echo "bad_words";
+                                break;
+                            }else{
+                                insert_comment($text,$article_id,);
+                                header("location:single.php?id={$article_id}");
+                                break;
+                            }
+                        }
+                    }
+
+                }
+                ?>
 
                 <div class="clearfix"></div>
                 <br>
                 <br>
-                <form action="/comment-post" method="post">
+                <form enctype="multipart/form-data" method="post">
                     <span>متن نظر شما</span>
                     <textarea name="text"></textarea>
                     <input type="hidden" name="article_id" value="{{$single->id}}">
                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                     <input type="hidden" name="user_name" value="{{Auth::user()->name}}">
-                    <input type="submit" class="btn btn-success" value="ثبت نظر">
+                    <input type="submit" name="send" class="btn btn-success" value="ثبت نظر">
                 </form>
             </div>
         </div>

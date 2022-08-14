@@ -60,8 +60,21 @@ function delete_category($id){
     $query->execute();
 
 }
+function cat_callback(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from category_tbl where parent='0' and status='on' order by id desc ");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function subcat_callback($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from category_tbl where parent='$id' and status='on' order by id desc");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
 
-
+}
 
 
 

@@ -118,7 +118,16 @@ function sub_sliders_records(){
     $res=$query->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
-
+function slide_show(){
+    $pdo=connect_db();
+    $query1=$pdo->prepare("select * from slider_tbl where parent='0' and status='on'");
+    $query1->execute();
+    $res1=$query1->fetch(PDO::FETCH_OBJ);
+    $query2=$pdo->prepare("select * from slider_tbl where parent='$res1->id' and status='on'");
+    $query2->execute();
+    $res2=$query2->fetchAll(PDO::FETCH_OBJ);
+    return $res2;
+}
 
 
 

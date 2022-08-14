@@ -153,6 +153,38 @@ function select_bad_word(){
     $res=$query->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
+function published_article($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from article_tbl where id='$id' and status='publish'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
+function on_parent_comments($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from comment_tbl where parent='0' and status_comment='publish' and article_id='$id' order by id desc ");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function on_reply_comments($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from comment_tbl where parent='$id' and status_reply='publish' order by id desc ");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function insert_comment($text,$article_id){
+    $parent=0;
+    $author=$_SESSION['login_user'];
+    $code=getRandomString(6);
+    $date=jdate('y/m/d');
+    $status_comment='publish';
+    $status_reply='publish';
+    $pdo=connect_db();
+    $query=$pdo->prepare("insert into comment_tbl(code, article_id, parent, author, text, date, status_comment, status_reply) VALUES ('$code','$article_id','$parent','$author','$text','$date','$status_comment','$status_reply')");
+    $query->execute();
+}
 
 
 
