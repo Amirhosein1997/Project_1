@@ -316,6 +316,21 @@ function sess_to_usertbl($sess){
     $res=$query->fetch(PDO::FETCH_OBJ);
     return $res;
 }
+function onedayago_users(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from session_start where login_date > DATE_SUB(now(), INTERVAL 1 DAY)");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function sess_id_call($id){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from session_start where id='$id'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
+
 
 
 

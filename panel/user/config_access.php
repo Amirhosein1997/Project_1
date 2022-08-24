@@ -29,6 +29,7 @@ $new_up_permition=explode(',',$up_permition->permition);}
     $title=$_POST['title'];
     $status=$_POST['status'];
     insert_permition($title,$status,$new_perm);
+    last_activity('permition',$_SESSION['login_user']);
     $result='ok_made_access';
     header("location:dashboard.php?page=config-access&op={$result}");
 
@@ -38,6 +39,7 @@ $new_up_permition=explode(',',$up_permition->permition);}
     $title=$_POST['title'];
     $status=$_POST['status'];
     update_permition($id,$title,$status,$new_perm);
+    last_activity('permition',$_SESSION['login_user']);
     $result='ok_update_access';
     header("location:dashboard.php?page=config-access&op={$result}");
 

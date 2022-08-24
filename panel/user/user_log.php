@@ -5,6 +5,7 @@ include_once '../functions/f-user.php';
 
 
 
+
     <div style="border: 1px solid;padding: 10px;box-shadow: 5px 5px 8px blue, 10px 10px 8px red, 15px 15px 8px green;margin: 20px;">
         <h5>گزارش گیری از وضعیت کاربران</h5>
         <hr>
@@ -68,9 +69,9 @@ include_once '../functions/f-user.php';
                 case 'offline_users':
                     $sess_record=offline_users();
                     break;
-                /* case 'day':
-                     $sess_record=
-                     break;  */
+                 case 'day':
+                     $sess_record=onedayago_users();
+                     break;
             }
 
         }
@@ -79,16 +80,19 @@ include_once '../functions/f-user.php';
             <label>انتخاب دسته بندی مورد نظر برای نمایش:</label>
             <select name="status" class="form-select">
                 <option disabled >__انتخاب دسته بندی</option>
-                <option value="day">__گزارش یک ساعت اخیر تمام کاربران</option>
-                <option selected value="online_users">__گزارش وضعیت کاربران انلاین</option>
+                <option value="day">__گزارش یک روز اخیر تمام کاربران</option>
+                <option value="online_users">__گزارش وضعیت کاربران انلاین</option>
                 <option value="offline_users">__گزارش وضعیت کاربران افلاین</option>
             </select>
             <button name="show" type="submit" class="btn btn-primary">نمایش</button>
         </form>
 
         <hr>
-        <button type="button" class="btn btn-success">چاپ گزارش</button>
-        <table class="table table-dark table-hover">
+        <button type="button" class="btn btn-success" onclick="printpart()">چاپ گزارش</button>
+        <button type="button" class="btn btn-info" onclick="window.print()">چاپ صفحه</button>
+        <button class="btn btn-info" onClick="window.location.reload();">بروزرسانی</button>
+        <div id="my_tbl">
+        <table class="table table-dark table-hover" >
             <thead>
             <tr>
                 <th>ردیف</th>
@@ -116,9 +120,9 @@ include_once '../functions/f-user.php';
                     echo $permition_record->name;
                     ?>
                 </td>
-                <td>#</td>
+                <td><?php echo $value->last_activity; ?></td>
                 <td><?php echo $value->login_date; ?></td>
-                <td> <a href="#" class="btn btn-info">گزارش ورود</a></td>
+                <td> <a href="dashboard.php?page=single-user-log&id=<?php echo $value->id; ?>" class="btn btn-info">گزارش ورود</a></td>
                 <td>
                     <?php if ($value->status=='online'):?>
                     <button type="button" class="btn btn-success">online</button>
@@ -131,7 +135,7 @@ include_once '../functions/f-user.php';
             <?php endif;?>
             </tbody>
         </table>
-
+        </div>
 
 
 
@@ -146,5 +150,15 @@ include_once '../functions/f-user.php';
 
 
     </div>
-
+<script>
+    function printpart () {
+        var prtContent = document.getElementById("my_tbl");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
 

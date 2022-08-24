@@ -37,6 +37,7 @@ if($pdo){
 }
      insert_info_file($items,$xlsxfile,$location);
      update_info_bulk_user();
+     last_activity('group_user_form',$_SESSION['login_user']);
     $result='ok_register_bulk_users';
     header("location:dashboard.php?page=setting-user&op={$result}");
     }

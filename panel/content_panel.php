@@ -120,6 +120,9 @@
             case 'user-log':
                 include_once 'user/user_log.php';
                 break;
+            case 'single-user-log':
+                include_once 'user/single_user_log.php';
+                break;
             case 'setting-sms' :
                 include_once 'sms/setting_sms.php';
                 break;

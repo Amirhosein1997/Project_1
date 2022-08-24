@@ -32,8 +32,29 @@ $query2=$pdo->prepare("select * from permition_tbl where id=$res1->permition");
 $query2->execute();
 $res2=$query2->fetch(PDO::FETCH_OBJ);
 return $res2;
+}
+function last_activity($switcher,$sess){
+    switch ($switcher){
+        case 'single_user_form':
+            $last_activity='پیکربندی کاربر جدید';
+            break;
+        case 'group_user_form':
+            $last_activity='پیکربندی گروهی کاربران';
+            break;
+        case 'permition':
+            $last_activity='پیکربندی دسترسی ها';
+            break;
 
+
+    }
+    $pdo=connect_db();
+    $query=$pdo->prepare("update session_start set last_activity='$last_activity' where title='$sess' ");
+    $query->execute();
 
 }
+
+
+
+
 
 ?>

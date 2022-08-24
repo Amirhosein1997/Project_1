@@ -10,6 +10,7 @@ if(isset($_POST['submit'])){
     $info=$_POST['info'];
     $img=$_FILES['img'];
     insert_info_user($info,$img);
+    last_activity('single_user_form',$_SESSION['login_user']);
     $result='ok_register_user';
     header("location:dashboard.php?page=setting-user&op={$result}");
 }
