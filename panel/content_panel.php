@@ -117,6 +117,9 @@
             case 'edit-info-user' :
                 include_once 'user/setting_edit_user.php';
                 break;
+            case 'user-log':
+                include_once 'user/user_log.php';
+                break;
             case 'setting-sms' :
                 include_once 'sms/setting_sms.php';
                 break;

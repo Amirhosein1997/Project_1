@@ -10,7 +10,7 @@ $degree=$info['degree'];$field=$info['field'];$phone=$info['phone'];$state=$info
 $email=$info['email'];$linkdin=$info['linkdin'];$instagram=$info['instagram'];$telegram=$info['telegram'];
 $home_address=$info['home_address'];$work_address=$info['work_address'];$skill=$info['skill'];
 $skill_desc=$info['skill_desc'];$permition=$info['permition'];$status=$info['status'];$author=$_SESSION['login_user'];
-$date_register=date('Y/M/D');$main_dir="../img/users/$fullname/";
+$date_register=date("Y/m/d");$main_dir="../img/users/$fullname/";
  mkdir($main_dir);
  if($img['name'] !== ""){
  $dir_pics=upload_pics($img, "../img/users/$fullname/" );
@@ -28,10 +28,21 @@ $pdo=connect_db();
 $query=$pdo->prepare("select * from users_tbl where user_name='$user' ");
 $query->execute();
 $res=$query->fetch(PDO::FETCH_OBJ);
+$date=date("Y/m/d");
+$status='online';
 if($res){
     $pas=sha1($pass);
     if($pas == $res->password){
         $_SESSION['login_user']=$res->user_name;
+        $sess_record=sess_checking($res->user_name);
+        if ($sess_record){
+            $query=$pdo->prepare("update session_start set status='online', login_date='$date' where title='$res->user_name'");
+            $query->execute();
+        }else{
+            $query2=$pdo->prepare("insert into session_start(title, login_date, status ) VALUES ('$res->user_name','$date','$status')");
+            $query2->execute();
+        }
+
         header("location:panel/dashboard.php?page=welcome-page");
 
     echo "you are logged in";
@@ -257,9 +268,54 @@ function user_reco($user_name){
     $res=$query->fetch(PDO::FETCH_OBJ);
     return $res;
 }
-
-
-
+function users_records(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from users_tbl where status='active'");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function recent_users(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from users_tbl where register_date > DATE_SUB(now(), INTERVAL 1 DAY) " );
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function online_users(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from session_start where status='online'");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function offline_users(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from session_start where status='offline'");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function log_out($session){
+    $pdo=connect_db();
+    $date=date("Y/m/d");
+    $query=$pdo->prepare("update session_start set status='offline', logout_date='$date'  where title='$session'");
+    $query->execute();
+}
+function sess_checking($sess){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from session_start where title='$sess'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
+function sess_to_usertbl($sess){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from users_tbl where user_name='$sess'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
 
 
 
