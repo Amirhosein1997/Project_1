@@ -22,6 +22,7 @@ if (strpos($select_permitions->permition,'list_category.php')!==false):
             <th scope="col">وضعیت</th>
             <th scope="col">ویرایش</th>
             <th scope="col">حذف</th>
+            <th scope="col">ویرایش زیر دسته</th>
         </tr>
         </thead>
         <tbody>
@@ -52,7 +53,11 @@ if (strpos($select_permitions->permition,'list_category.php')!==false):
             <td><?php echo $subcat->status; ?></td>
             <td><a class="btn btn-primary" href="dashboard.php?page=edit-category&id=<?php echo $subcat->id; ?>" role="button">ویرایش</a></td>
             <td><a class="btn btn-primary" href="dashboard.php?page=delete-category&id=<?php echo $subcat->id; ?>" role="button">حذف</a></td>
+            <td><a href="dashboard.php?page=add-subcat&id=<?php echo $subcat->id; ?>" class="btn btn-success">افزودن زیر دسته</a></td>
         </tr>
+
+
+
         <?php
         endforeach;
             ?>

@@ -330,8 +330,37 @@ function sess_id_call($id){
     $res=$query->fetch(PDO::FETCH_OBJ);
     return $res;
 }
+function title_record($file){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from title_tag where file_name='$file'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
 
-
-
+function insert_into_tag_tbl($dir,$file,$title){
+    $pdo=connect_db();
+    if ($title==''){$status='off';}else{$status='on';}
+    if (title_record($file)=="") {
+        $query = $pdo->prepare("insert into title_tag(file_name, title, dir, title_status) VALUES ('$file','$title','$dir','$status')");
+        $query->execute();
+    }elseif (title_record($file)){
+      /*  $pdo=connect_db();
+        $query=$pdo->prepare("update title_tag set file_name='$file',title='$title',dir='$dir',title_status='$status' where file_name='$file'");
+        $query->execute();   */
+    }
+}
+function title_records(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from title_tag order by id desc ");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+function insert_tag($title,$file){
+    $pdo=connect_db();
+    $query=$pdo->prepare("update title_tag set title='$title',title_status='on'  where file_name='$file' ");
+    $query->execute();
+}
 
 ?>

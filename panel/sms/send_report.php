@@ -4,7 +4,7 @@ include_once '../functions/f-sms.php';
 ?>
 <head>
     <title>
-        گزارش ارسال پیامک
+
     </title>
 </head>
 <br>

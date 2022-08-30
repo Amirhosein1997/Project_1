@@ -98,7 +98,7 @@ if($_GET['op']=='ok_made_access'):?>
 
 
 
-<form method="post" enctype="multipart/form-data" style="padding:30px;background-color: #488858;box-shadow: #1b1e21;">
+<form method="post" enctype="multipart/form-data" style="border-radius: 5px;background-color: #0f6674;border: 1px solid;padding: 30px;box-shadow: 5px 10px 8px #888888;">
 <h5>ایجاد مجوز دسترسی</h5>
     <br>
     <div class="row">
@@ -128,12 +128,14 @@ foreach ($scan_dir as $key=>$file):
 $array_file=explode('.',$file);
 if (end($array_file)=="php"):
 $title=page_title("user/".$file).'';
-if ($title!==''):
+insert_into_tag_tbl($dir_category,$file,$title);
+$title_record=title_record($file);
+if ($title_record->title_status=='on'):
 ?>
         <div class="form-check">
             <input name="page[]" class="form-check-input" type="checkbox" value="<?php echo $file; ?>" <?php if ($update){if (strpos($up_permition->permition,$file) !==false){echo 'checked';}} ?> id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
-                    <?php echo $title; ?>
+                    <?php echo $title_record->title; ?>
             </label>
         </div>
         <?php endif;?>
@@ -269,6 +271,36 @@ if ($title!==''):
     </div>
 
 </div>
+    <div class="row">
+        <div class="col">
+            <h5>مدیریت پیامک ها</h5>
+            <br>
+            <?php
+            $dir_category='sms/';
+            $scan_dir=scandir($dir_category);
+            foreach ($scan_dir as $key=>$file):
+                $array_file=explode('.',$file);
+                if (end($array_file)=="php"):
+                    $title=page_title("sms/".$file).'';
+                    if ($title!==''):
+                        ?>
+                        <div class="form-check">
+                            <input name="page[]" class="form-check-input" type="checkbox" value="<?php echo $file; ?>" <?php if ($update){if (strpos($up_permition->permition,$file) !==false){echo 'checked';}} ?> id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                <?php echo $title; ?>
+                            </label>
+                        </div>
+                    <?php endif;?>
+                <?php endif;?>
+            <?php endforeach;?>
+
+
+
+
+        </div>
+
+
+    </div>
     <?php if($update): ?>
     <div class="mb-4 mt-3">
         <button style="float: left;" name="update_access" value="ویرایش مجوز"  type="submit" class="btn btn-primary">ویرایش مجوز</button>
@@ -278,7 +310,7 @@ if ($title!==''):
         <button style="float: left;" name="send_access" value="ایجاد مجوز"  type="submit" class="btn btn-primary">ایجاد مجوز</button>
     </div>
 <?php endif; ?>
-
+    <a href="dashboard.php?page=edit-access" class="btn btn-success">ویرایش صفحات دسترسی</a>
 
 
 

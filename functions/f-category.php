@@ -75,6 +75,22 @@ function subcat_callback($id){
     return $res;
 
 }
+function add_subcategory($info,$id){
+    $title=$info['title'];
+    $sort=$info['sort'];
+    $parent=$id;
+    if (isset($info['status'])){
+        $status='on';
+    }else{
+        $status='off';
+    }
+    $pdo=connect_db();
+    $query=$pdo->prepare("INSERT INTO category_tbl (title, sort, parent, status) VALUES('$title','$sort','$parent','$status')");
+    $query->execute();
+
+}
+
+
 
 
 

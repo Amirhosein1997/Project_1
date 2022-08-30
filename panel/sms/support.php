@@ -2,11 +2,7 @@
 include_once '../functions/functions.php';
 include_once '../functions/f-sms.php';
 ?>
-<head>
-    <title>
-        پشتیبانی
-    </title>
-</head>
+
 <br>
 <?php
 if (isset($_POST['send_ticket'])){

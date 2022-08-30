@@ -20,6 +20,9 @@
             case 'delete-category' :
                 include_once 'Category/delete_category.php';
                 break;
+            case 'add-subcat':
+                include_once 'category/add_sub_cat.php';
+                break;
             case 'new-article' :
                 include_once 'article/add_article.php';
                 break;
@@ -122,6 +125,12 @@
                 break;
             case 'single-user-log':
                 include_once 'user/single_user_log.php';
+                break;
+            case 'edit-access':
+                include_once 'user/edit_access.php';
+                break;
+            case 'add-title-tag':
+                include_once 'user/add_title_tag.php';
                 break;
             case 'setting-sms' :
                 include_once 'sms/setting_sms.php';

@@ -39,6 +39,7 @@
                                             ?>
                                             <li>
                                                 <a href="#"><?php echo $subcat->title; ?></a>
+
                                             </li>
                                         <?php endforeach;?>
                                     </ul>
