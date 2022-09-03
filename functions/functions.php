@@ -52,9 +52,3 @@ function last_activity($switcher,$sess){
     $query->execute();
 
 }
-
-
-
-
-
-?>

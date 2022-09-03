@@ -147,4 +147,22 @@ function single_record(){
     $res=$query->fetch(PDO::FETCH_OBJ);
     return $res;
 }
+
+function insert_template_pages($files){
+    $pdo=connect_db();
+    foreach ($files as $file){
+        if (!template_record($file)) {
+            $link = "panel/template_page/" . $file;
+            $query = $pdo->prepare("insert into template_page(name, link) VALUES ('$file','$link')");
+            $query->execute();
+        }
+        }
+}
+function template_record($file){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from template_page where name='$file'");
+    $query->execute();
+    $res=$query->fetch(PDO::FETCH_OBJ);
+    return $res;
+}
 ?>

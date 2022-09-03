@@ -29,6 +29,11 @@ include_once '../functions/f-page.php';
         </svg> اگر نیاز به افزودن بیش از یک ابزارک دارید لطفا روی " + افزودن ابزارک " کلیک کنید.</p>
 </div>
 <hr>
+<?php
+$template_pages=scandir("template_page/");
+$files = array_diff($template_pages, array('.', '..'));
+insert_template_pages($files);
+?>
 <div class="accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">

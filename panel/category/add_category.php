@@ -45,7 +45,7 @@ if (isset($_POST['send'])){
     <br>
     <button type="submit" name="send" class="btn btn-primary">ایجاد منو</button>
 
-    <a class="btn btn-primary" href="dashboard.php?page=new-category" role="button">بازگشت</a>
+    <a class="btn btn-primary" href="dashboard.php?page=list-category" role="button">بازگشت</a>
 </form>
 <?php else:?>
 <div class="alert alert-primary" role="alert">
