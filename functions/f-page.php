@@ -165,4 +165,30 @@ function template_record($file){
     $res=$query->fetch(PDO::FETCH_OBJ);
     return $res;
 }
+
+function create_template($info){
+    $title=$info["title"];
+    $code=$info['code'];
+    $status=$info['status'];
+    switch ($status){
+        case "read":
+            $mode="r";
+            break;
+        case "write":
+            $mode="w";
+            break;
+    }
+
+        fopen('template_page/'.$title.'.php',$mode);
+        file_put_contents('template_page/'.$title.'.php',$code);
+    $pdo=connect_db();
+    $query=$pdo->prepare("insert into created_templates (file_name, code, status) VALUES ('$title','$code','$status')");
+    $query->execute();
+
+
+}
+
+
+
+
 ?>

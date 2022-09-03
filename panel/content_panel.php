@@ -92,6 +92,9 @@
             case 'edit_groupe_page' :
                 include_once 'page/edit_groupe_page.php';
                 break;
+            case 'add-template-page':
+                include_once 'page/add_template_page.php';
+                break;
             case 'edit-page':
                 include_once 'page/edit_page.php';
                 break;
