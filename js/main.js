@@ -72,6 +72,15 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    $('.admin-menu > ul > li.skyroom').click(function(){
+        //$('ul.sub-admin',this).slideToggle();
+        $("ul.sub-skyroom").slideToggle();
+        //$(".admin-menu  ul  li > ul.sub-admin").slideToggle();
+    });
+});
+
+
 
 
 $('.owl-carousel').owlCarousel({

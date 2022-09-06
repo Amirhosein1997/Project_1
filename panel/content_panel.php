@@ -162,7 +162,11 @@
             case 'users-list':
                 include_once 'phonebook/users_list.php';
                 break;
+            case 'skyroom-setting':
+                include_once 'skyroom/skyroom_setting.php';
+                break;
         }
+
     } else {
         include_once 'quick_access.php';
     }

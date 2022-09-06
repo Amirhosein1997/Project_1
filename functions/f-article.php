@@ -185,7 +185,15 @@ function insert_comment($text,$article_id){
     $query=$pdo->prepare("insert into comment_tbl(code, article_id, parent, author, text, date, status_comment, status_reply) VALUES ('$code','$article_id','$parent','$author','$text','$date','$status_comment','$status_reply')");
     $query->execute();
 }
+function pagination_method($page,$limit){
 
+    $offset=($page-1) * $limit;
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from article_tbl limit $limit offset $offset ");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
 
 
 ?>
