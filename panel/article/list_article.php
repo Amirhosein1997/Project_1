@@ -13,6 +13,11 @@ if (strpos($select_permitions->permition,'list_article') !==false):
     }
     $limit=5;
     $limited_records=pagination_method($page,$limit);
+    if (isset($_POST["delete"])){
+        $ids=$_POST["check"];
+        delete_selected($ids);
+        header("location:dashboard.php?page=list-article");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,10 +29,11 @@ if (strpos($select_permitions->permition,'list_article') !==false):
     <div style="text-align: center" class="alert alert-primary" role="alert">
         تعداد مقالات: <?php echo $num ?>
     </div>
-
-<table class="table table-sm table-dark table-hover">
+<form method="post" enctype="multipart/form-data">
+<table class="table table-sm table-dark table-hover" >
     <thead>
     <tr>
+        <th scope="col"><input type="checkbox" id="select-all"></th>
         <th scope="col">ردیف</th>
         <th scope="col">کد محتوا</th>
         <th scope="col">عنوان نوشته</th>
@@ -45,10 +51,11 @@ if (strpos($select_permitions->permition,'list_article') !==false):
     <?php $articles=articles_list();
     foreach ($limited_records as $key=>$article): ?>
     <tr>
+        <td><input class="form-check-input" type="checkbox"  name="check[]" value="<?php echo $article->id; ?>" ></td>
         <td><?php echo ($limit*($page-1))+($key+1); ?></td>
         <td><?php echo $article->code_article; ?></td>
         <td><?php echo $article->title; ?></td>
-        <td><?php if(strlen($article->text) > 30){$article->text = substr($article->text, 0, 30) . '...';echo $article->text;}else{echo $article->text;} ?></td>
+        <td><?php if(strlen($article->text) > 10){$article->text = substr($article->text, 0, 10) . '...';echo $article->text;}else{echo $article->text;} ?></td>
         <td><?php $cats_names=categories_names($article->cat_id);
             foreach ($cats_names as $item){
                 echo $item->title.PHP_EOL;
@@ -76,6 +83,11 @@ if (strpos($select_permitions->permition,'list_article') !==false):
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
 </table>
+    <button type="submit" class="btn btn-danger" name="delete">حذف انتخاب ها</button>
+</form>
+
+
+
 <?php else:?>
     <div class="alert alert-dark" role="alert">
        SORRY NO ACCESS!!!!!!

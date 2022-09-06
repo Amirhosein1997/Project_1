@@ -194,6 +194,14 @@ function pagination_method($page,$limit){
     $res=$query->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
+function delete_selected($ids){
+    $imploded_ids=implode(",",$ids);
+    $pdo=connect_db();
+    $query=$pdo->prepare("delete from article_tbl where id in ($imploded_ids)");
+    $query->execute();
+
+}
+
 
 
 ?>

@@ -54,5 +54,14 @@ include_once '../functions/functions.php';
     <a class="btn btn-primary" href="../index.php" role="button">بازگشت به سایت</a>
 </div>
 <?php endif;?>
+
+
+<script>
+    $(document).ready(function() {
+        $('#select-all').click(function() {
+            $('input[type="checkbox"]').prop('checked', this.checked);
+        })
+    });
+</script>
 </body>
 </html>
