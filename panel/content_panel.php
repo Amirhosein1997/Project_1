@@ -165,6 +165,9 @@
             case 'skyroom-setting':
                 include_once 'skyroom/skyroom_setting.php';
                 break;
+            case 'pay-setting':
+                include_once 'payment/payment_setting.php';
+                break;
         }
 
     } else {

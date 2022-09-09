@@ -79,7 +79,13 @@ $(document).ready(function() {
         //$(".admin-menu  ul  li > ul.sub-admin").slideToggle();
     });
 });
-
+$(document).ready(function() {
+    $('.admin-menu > ul > li.pay').click(function(){
+        //$('ul.sub-admin',this).slideToggle();
+        $("ul.sub-pay").slideToggle();
+        //$(".admin-menu  ul  li > ul.sub-admin").slideToggle();
+    });
+});
 
 
 
