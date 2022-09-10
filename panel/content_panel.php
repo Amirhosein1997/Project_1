@@ -44,6 +44,9 @@
             case 'delete-comment' :
                 include_once 'article/delete_comment.php';
                 break;
+            case 'phpword-setting':
+                include_once 'article/phpword_setting.php';
+                break;
             case 'setting-slider' :
                 include_once 'slider/setting_slider.php';
                 break;

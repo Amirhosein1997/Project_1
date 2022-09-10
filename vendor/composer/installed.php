@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-amirhosein_khaleghi',
         'version' => 'dev-amirhosein_khaleghi',
-        'reference' => '998785bc80577c087fc1a2d193b80f43536ec140',
+        'reference' => '25b3068cb29d6243d086f26340e16503e8522eb5',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-amirhosein_khaleghi',
             'version' => 'dev-amirhosein_khaleghi',
-            'reference' => '998785bc80577c087fc1a2d193b80f43536ec140',
+            'reference' => '25b3068cb29d6243d086f26340e16503e8522eb5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
