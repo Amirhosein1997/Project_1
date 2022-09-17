@@ -18,6 +18,15 @@ function subcategories_callback($id){
     return $res;
 
 }
+
+function email_list(){
+    $pdo=connect_db();
+    $query=$pdo->prepare("select * from email_article_tbl");
+    $query->execute();
+    $res=$query->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+
 function publish_article($info,$img,$cats,$status){
     $title=$info['title'];
     $code=getRandomString('6');
@@ -29,9 +38,17 @@ function publish_article($info,$img,$cats,$status){
     $author=$_SESSION['login_user'];
     $date=date('Y/M/D');
     $pdo=connect_db();
-    $query=$pdo->prepare("insert into article_tbl(code_article, title, text, cat_id, img, author, date, status)values ('$code','$title','$text','$cat_id','$image','$author','$date','$status')");
-    $query->execute();
-
+    $query1=$pdo->prepare("insert into article_tbl(code_article, title, text, cat_id, img, author, date, status)values ('$code','$title','$text','$cat_id','$image','$author','$date','$status')");
+    $query1->execute();
+    $query2=$pdo->prepare("select * from article_tbl where title='$title'");
+    $query2->execute();
+    $res=$query2->fetch(PDO::FETCH_OBJ);
+    $emails=email_list();
+    foreach ($emails as $email){
+        $subject="اطلاع رسانی مقاله جدید";
+        $comment="http://localhost/project%201/single.php?id={$res->id}"." ".":{$title}";
+        mail($email->user_email,$subject,$comment); // this is the email function
+    }
 }
     function articles_numbers(){
     $pdo=connect_db();
@@ -285,6 +302,11 @@ function word_records(){
     return $res;
 }
 
+function add_to_news($email){
+    $pdo=connect_db();
+    $query=$pdo->prepare("insert into email_article_tbl(user_email)values ('$email')");
+    $query->execute();
+}
 
 
 

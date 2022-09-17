@@ -123,6 +123,23 @@ ob_start();
 </div>
 
 <br>
+<hr>
+<?php
+include_once 'functions/f-article.php';
+if (isset($_POST['send'])){
+    $article_email=$_POST['email_article'];
+    add_to_news($article_email);
+
+}
+?>
+<h6 >عضویت در خبرنامه سایت</h6>
+<form  method="post" enctype="multipart/form-data">
+    <div class="col-md-4" >
+        <label for="email" class="form-label">ایمیل:</label>
+        <input size="20" type="email" class="form-control" id="email" placeholder="Enter email" name="email_article">
+    </div>
+    <button name="send" type="submit" class="btn btn-primary">ثبت ایمیل</button>
+</form>
 <br>
 <footer>
     <div class="container">

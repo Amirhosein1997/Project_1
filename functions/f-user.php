@@ -179,10 +179,13 @@ function register_user($info){
     $username=$info['username'];
     $password=sha1($info['password']);
     $email=$info['email'];
+    $authentication_code=getRandomString(6);
     $pdo=connect_db();
-    $query=$pdo->prepare("insert into users_tbl (user_name,password,email) values ('$username','$password','$email')");
+    $query=$pdo->prepare("insert into users_tbl (user_name,password,email,authentication,authentication_code) values ('$username','$password','$email','false','$authentication_code')");
     $query->execute();
-
+    $subject="احراز هویت";
+    $comment="http://localhost/project%201/panel/authentication.php?authentication_code={$authentication_code}"." ".":لینک";
+    mail($email,$subject,$comment); // this is the email function
 }
 
 function list_upload_file(){
@@ -362,5 +365,27 @@ function insert_tag($title,$file){
     $query=$pdo->prepare("update title_tag set title='$title',title_status='on'  where file_name='$file' ");
     $query->execute();
 }
+
+function check_authentication_code($authentication_code){
+    $status="";
+    $pdo=connect_db();
+    $query1=$pdo->prepare("select * from users_tbl where authentication_code='$authentication_code' ");
+    $query1->execute();
+    $res=$query1->fetch(PDO::FETCH_OBJ);
+    if ($res){
+        $pdo=connect_db();
+        $query2=$pdo->prepare("update users_tbl set authentication='true' where authentication_code='$authentication_code'");
+        $query2->execute();
+        $status="pass";
+        return $status;
+    }else{
+        $status="fail";
+        return $status;
+    }
+
+
+
+}
+
 
 ?>
